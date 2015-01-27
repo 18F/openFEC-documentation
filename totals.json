@@ -1,0 +1,47 @@
+{
+    "apiVersion": "0.2",
+    "swaggerVersion": "1.2",
+    "basePath": "http://127.0.0.1:5000",
+    "produces":
+    [
+        "application/json"
+    ],
+    "apis":
+    [
+        {
+            "path": "/total",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a list of candidates.",
+                    "nickname": "getCandidate",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name":"/",
+                            "description":"A single committee's reports and cycle totals. This will be slightly faster that using committee_id as a filter but, only one committee_id is accepted per call."
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "committee_id",
+                            "description": "Synonym for /"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "fields",
+                            "description": "Comma separated list of fields to display or * for all.",
+                            "allowMultiple": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+
+
+

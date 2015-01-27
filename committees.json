@@ -1,0 +1,88 @@
+{
+    "apiVersion": "0.2",
+    "swaggerVersion": "1.2",
+    "basePath": "http://127.0.0.1:5000",
+    "produces":
+    [
+        "application/json"
+    ],
+    "apis":
+    [
+        {
+            "path": "/committee",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a list of candidates.",
+                    "nickname": "getCandidate",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "q",
+                            "description": "Full-text search"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "/",
+                            "description": "A single committee's record this will be slightly faster that using committee_id as a filter but, only one committee_id is accepted per call and only field filtering will be applicable."
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "cmte_id",
+                            "description": "Accepts one or more committee ids."
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "name",
+                            "description": "Committee's name"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "state",
+                            "description": "Two-letter state abbreviation"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "type",
+                            "description": "one-letter code of committee type"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "designation",
+                            "description": "one-letter code of committee designation"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "organization_type",
+                            "description": "one-letter code of organization type"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "candidate_id",
+                            "description": "Associated candidate's id number"
+                        },
+                        {
+                            "paramType": "query",
+                            "type": "string",
+                            "name": "party",
+                            "description": "Party of the committee if applicable"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+
+
+

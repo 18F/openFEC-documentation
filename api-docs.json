@@ -1,17 +1,20 @@
 {
-	"apiVersion": "1.0",
-	"swaggerVersion": "1.2",
-    "basePath": "http://localhost:4000",
-	"apis": 
-	[
-		{
-			"path": "/data.json",
-			"description": "Operations about datasets"
-		},
-
-		{
-			"path": "/hmda.json",
-			"description": "Operations about LAR data"
-		}
-	]
+    "apiVersion": "0.2",
+    "swaggerVersion": "1.2",
+    "basePath": "http://localhost:4000/developer-hub",
+    "apis":
+    [
+        {
+            "path": "/candidates.json",
+            "description": "<p>Candidates are search-able by name, id and the parameters listed below. Years may be provided to see the activity of a candidate over time, hiding the information that is not relevant to that year. Information is grouped in the elections section, by two-year election cycles.</p>Results default to the last 4 years, but particular years and '*' for all years may be passed into the request, as described below. Additionally, all fields are not shown my default but can be adjusted by the fields parameter.</p><p>The endpoint also returns basic information about committees that file regarding the candidate. Each result reflects a unique FEC candidate id. That id is unique to the candidate for a particular office sought. So, if a candidate runs for the same office over time, that id will stay the same. If the same person runs for another office, for example, a House candidate runs for a Senate office, that candidate will get an additional id that will be unique to him or her for that office.</p><p>The Candidate endpoint uses data from FEC forms 1 and 2 with additional forms to provide context.</p>"
+        },
+        {
+            "path": "/committees.json",
+            "description": "<p>Committees include the committees and organizations that file with the FEC. There are a number of different types of organizations who file financial reports with the FEC:<ul><li>Campaign committees authorized by particular candidates to raise and spend funds in their campaigns;</li><li>Non-party committees (i.e. PACs), some of which may be sponsored by corporations, unions, trade or membership groups, etc.;</li><li>Political Party committees at the national, state and local levels;</li><li>Groups and individuals making only Independent Expenditures;</li><li>Corporations, Unions and other organizations making Internal Communications.</li></ul><p>The committee endpoint is search-able by name, id and the parameters outlined below.</p><p>There is a description about the type and designation of committee the address of the committee, treasurer and custodian information and information about candidates mentioned by committees in their filings. Read the fields below for a complete listing of information that can be returned.</p><p>The committee endpoint returns FEC forms 1 and 2 with additional forms to provide context.</p>"
+        },
+        {
+            "path": "/totals.json",
+            "description": "<p>Provides key information about committee's finance reports and provides 2-year election totals for key numbers.</p><p>As part of each financial report, committees must provide a summary of their financial activity in each filing, and these summaries for each reporting period are included in these files. Generally, committees file reports on a quarterly or monthly basis, but some must also submit a report 12 days before primary elections. During the primary election season, therefore, the period covered by this file may be different for different committees. These totals also incorporate any changes made by committees if any report covering the period is amended.</p><p>There are several different reporting structures, depending on what type of organization is submitting financial information. To see an example of these reporting requirements you can look at the summary and detailed summary pages of the FEC form 3, form 3X and form 3P.</p>"
+        }
+    ]
 }
