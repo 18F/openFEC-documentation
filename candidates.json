@@ -15,6 +15,7 @@
                     "method": "GET",
                     "summary": "Get a list of candidates.",
                     "nickname": "getCandidate",
+                    "type": "candidate_response",
                     "parameters": [
                         {
                             "paramType": "query",
@@ -89,14 +90,226 @@
                             "description":"Comma separated list of fields to display or * for all",
                             "allowMultiple": true
                         }
-
                     ]
                 }
             ]
         }
-    ]
+    ],
+    "models":
+    {
+        "candidate_response":
+        {
+            "id": "candidate_response",
+            "description": "JSON response from the /candidate endpoint",
+            "properties":
+            {
+                "api_version": {
+                    "type": "string",
+                    "description": "Version of API that produced this response"
+                },
+                "pagination": {
+                    "$ref": "pagination",
+                    "description": "Pagination metadata (see below)"
+                },
+                "results": {
+                    "$ref": "Candidate",
+                    "description": "Candidate data (see below)"
+                }
+            }
+        },
+        "pagination": {
+            "id": "pagination",
+            "description": "Pagination metadata",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "description": "Total Candidates in response"
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "Current page"
+                },
+                "pages": {
+                    "type": "integer",
+                    "description": "Total number of pages"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "Candidates per page"
+                }
+            }
+        },
+        "Candidate": {
+            "id": "Candidate",
+            "description": "Candidate data",
+            "properties": {
+                "candidate_id": {
+                    "type": "string",
+                    "description": "\nUnique id given to a candidate running for an office. Note that a candidate that runs for different offices, such as Senate and President, will have multiple candidate_ids. Candidates with multiple elections for the same office do not change candidate_ids.\n\ncandidate_ids beginning with an 'H' are for House candidates, ids beginning with a 'S' are Senate candidates and ids beginning with 'P' are presidential candidates\n\n"
+                },
+                "name": {
+                    "$ref": "name",
+                    "description": "Full name and components"
+                },
+                "elections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "election"
+                    },
+                    "description": "Data specific to each election this candidate has participated in"
+                }
+            }
+        },
+        "election":{
+            "id": "election",
+            "description":"Election data",
+            "properties": {
+                "candidate_status": {
+                    "type": "string",
+                    "description": "Single letter designation of candidate status",
+                    "enum": [
+                        "C"
+                    ]
+                },
+                "candidate_status_full": {
+                    "type": "string",
+                    "description": "The candidate's statutory standing in an election. See ___ for definitions of potential values",
+                    "enum": [
+                        "candidate",
+                        "future_candidate",
+                        "not_yet_candidate",
+                        "prior_candidate"
+                    ]
+                },
+                "district": {
+                    "type": "string",
+                    "description": "The district of the office the candidate is running for. In cases where the code is 00, there is no district for the office, as is the case for Presidential and Senate elections, or the member is \"at large\" for House members"
+                },
+                "election_year": {
+                    "type": "string",
+                    "value": "date-time",
+                    "description": "Year of the election. Elections are in two-year election cycles."
+                },
+                "incumbent_challenge": {
+                    "type": "string",
+                    "description": "Single letter designation of incumbency status",
+                    "enum": [
+                        "I",
+                        "C",
+                        "O"
+                    ]
+                },
+                "incumbent_challenge_full": {
+                    "type": "string",
+                    "description": "Indicates whether a candidate is an incumbent, already in office; a challenger to an incumbent; or if it is an open_seat and no incumbent is running in the race",
+                    "enum": [
+                        "incumbent",
+                        "challenger",
+                        "open_seat"
+                    ]
+                },
+                "office": {
+                    "type": "string",
+                    "description": "Single letter designation of office sought",
+                    "enum": [
+                        "P",
+                        "S",
+                        "H"
+                    ]
+                },
+                "office_sought": {
+                    "type": "string",
+                    "description": "The office the candidate is seeking",
+                    "enum":[
+                        "President",
+                        "Senate",
+                        "House"
+                    ]
+                },
+                "party": {
+                    "type": "string",
+                    "description": "The three-letter code for the political party of the candidate"
+                },
+                "party_affiliation": {
+                    "type": "string",
+                    "description": "The full text string of political party of the candidate"
+                },
+                "primary_committee": {
+                    "$ref": "committee",
+                    "description": "The primary committee for the candidate"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The two letter postal abbreviation for the state in which the candidate is running"
+                },
+                "affiliated_committees": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "committee"
+                    },
+                    "description": "Committees that have mentioned this candidate in their filings"
+                }
+            }
+        },
+        "name":{
+            "id": "name",
+            "description":"",
+            "properties": {
+                "full_name": {
+                    "type": "string",
+                    "description": "Full name of the candidate used in the most recent election"
+                },
+                "name_1": {
+                    "type": "string",
+                    "description": "The part of the name that appears before the comma in full name"
+                },
+                "name_2": {
+                    "type": "string",
+                    "description": "The part of the name that appears after the comma in full name"
+                },
+                "other_names": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Other names and variations this candidate has filed with"
+                }
+            }
+        },
+        "committee": {
+            "id": "committee",
+            "description":"",
+            "properties": {
+                "committee_id": {
+                    "type": "string",
+                    "description": "Unique id of the committee"
+                },
+                "committee_name": {
+                    "type": "string",
+                    "description": "The name of the committee in its most recent records"
+                },
+                "designation": {
+                    "type": "string",
+                    "description": "Designation code of the committee"
+                },
+                "designation_full": {
+                    "type": "string",
+                    "description": "Designation of the committee. Committee designation can affect the rules the committee must follow. See ___ for full list of designations and codes."
+                },
+                "election_year": {
+                    "type": "string",
+                    "value": "date-time",
+                    "description": ""
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Single letter designation for committee type."
+                },
+                "type_full": {
+                    "type": "string",
+                    "description": "Full text committee type. Committee type can affect what rules the committee must follow. See ___ for full list of committee types and codes."
+                }
+            }
+        }
+    }
 }
-
-
-
-

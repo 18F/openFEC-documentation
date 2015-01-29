@@ -13,8 +13,10 @@
             "operations": [
                 {
                     "method": "GET",
-                    "summary": "Get a list of candidates.",
-                    "nickname": "getCandidate",
+                    "summary": "Get a list of committees.",
+                    "nickname": "getCommittee",
+                    "notes": "thing",
+                    "type": "Committee",
                     "parameters": [
                         {
                             "paramType": "query",
@@ -80,7 +82,14 @@
                 }
             ]
         }
-    ]
+    ],
+    "models":
+    {
+        "Committee": {
+            "id": "Committee",
+            "properties": {}
+        }
+    }
 }
 
 

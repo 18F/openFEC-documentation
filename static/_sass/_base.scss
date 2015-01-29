@@ -41,21 +41,21 @@ body {
 }
 /* IE7 and older can't resize px-based text */
 
-p, 
-blockquote, 
-q, 
-pre, 
-address, 
-hr, 
-code, 
-samp, 
-dl, 
-ol, 
-ul, 
-form, 
-table, 
-fieldset, 
-menu, 
+p,
+blockquote,
+q,
+pre,
+address,
+hr,
+code,
+samp,
+dl,
+ol,
+ul,
+form,
+table,
+fieldset,
+menu,
 img {
 
     margin:0;
@@ -174,7 +174,7 @@ pre, code {
     border-radius: 0.250em;
     overflow-x: auto;
     padding: 0.125em 0.250em;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 pre, code, kbd, samp {
@@ -485,13 +485,13 @@ ul.repo-list.no-padding {
 
 .wrap {
         max-width: 960px;
-        min-width: 320px; 
+        min-width: 320px;
 }
 
 /* offset the fixed position header for jump links */
 .anchor {
-    display: block; 
-    height: 4.375em; 
+    display: block;
+    height: 4.375em;
     margin-top: -4.375em;
     visibility: hidden;
 }
@@ -711,7 +711,7 @@ footer a:hover {
         float: right;
     }
 
-} 
+}
 
 
 /* DESKTOP STYLES 640px */
@@ -784,7 +784,7 @@ footer a:hover {
 @media only screen and (min-width: 46.5em) {
     nav {
         text-align: left;
-    } 
+    }
 
     .footer .footer-oss {
         width: 67%;
@@ -812,7 +812,7 @@ footer a:hover {
     .page-title br {
     display: block;
     }
-} 
+}
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP (1024PX) */
 /* full header design */
@@ -841,7 +841,7 @@ footer a:hover {
     line-height: 1;
     margin-bottom: 1.375em;
     margin-left: 0;
-    }  
+    }
 
     .header .logo {
     float: right;
@@ -849,20 +849,20 @@ footer a:hover {
     width: 210px;
     display: block;
     }
-} 
+}
 
 
 @media only screen and (min-width: 80em) {
 
 }
-/* DESKTOP 
+/* DESKTOP
 
 
 /*    W I D E S C R E E N    */
 /* Increased body size for legibility */
 @media only screen and (min-width: 87.5em) {
     body {
-        
+
     }
 }
 

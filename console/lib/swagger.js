@@ -490,7 +490,7 @@
       strongClose = '</span>';
       classOpen = strong + this.name + ' {' + strongClose;
       classClose = strong + '}' + strongClose;
-      returnVal = classOpen + '<div>' + propertiesStr.join(',</div><div>') + '</div>' + classClose;
+      returnVal = classOpen + '<div>' + propertiesStr.join('</div><div>') + '</div>' + classClose;
       if (!modelsToIgnore) {
         modelsToIgnore = [];
       }
