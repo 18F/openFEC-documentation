@@ -16,7 +16,7 @@
                     "summary": "Get a list of committees.",
                     "nickname": "getCommittee",
                     "notes": "thing",
-                    "type": "Committee",
+                    "type": "committee_response",
                     "parameters": [
                         {
                             "paramType": "query",
@@ -85,13 +85,233 @@
     ],
     "models":
     {
-        "Committee": {
-            "id": "Committee",
-            "properties": {}
+        "committee_response":
+        {
+            "id": "committee_response",
+            "description": "JSON response from the /committee endpoint",
+            "properties":
+            {
+                "api_version": {
+                    "type": "string",
+                    "description": "Version of API that produced this response"
+                },
+                "pagination": {
+                    "$ref": "pagination",
+                    "description": "Pagination metadata (see below)"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "committee"
+                    },
+                    "description": "A list of committees (see below)"
+                }
+            }
+        },
+        "pagination": {
+            "id": "pagination",
+            "description": "Pagination metadata",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "description": "Total Committees in response"
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "Current page"
+                },
+                "pages": {
+                    "type": "integer",
+                    "description": "Total number of pages"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "Committees per page"
+                }
+            }
+        },
+        "committee": {
+            "id": "committee",
+            "description": "Committee data",
+            "properties": {
+                "committee_id": {
+                    "type": "string",
+                    "description": "Unique id of the committee.\n\nThe Federal Election Commission assigns a 9-character alphanumeric code to each committee. The committee ID for a specific committee always remains the same."
+                },
+                "expire_date": {
+                    "type": "string",
+                    "value": "date-time",
+                    "description": "Expire dates apply to the information that the date is directly grouped with."
+                },
+                "form_type": {
+                    "type": "string",
+                    "description": "The type of filing this information came from"
+                },
+                "load_date": {
+                    "type": "string",
+                    "value": "date-time",
+                    "description": "The date this information was loaded into the system"
+                },
+                "status": {
+                    "$ref": "status",
+                    "description": "Data regarding the committee's type, designation, and filing status"
+                },
+                "description": {
+                    "$ref": "description",
+                    "description": "Additional stuff - CHANGE THIS"
+                },
+                "candidates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "candidate"
+                    },
+                    "description": "Candidates associated with a committee"
+                },
+                "address": {
+                    "$ref": "address",
+                    "description": "Mailing address for the committee"
+                },
+                "treasurer": {
+                    "$ref": "contact",
+                    "description": "Information about the treasurer"
+                },
+                "custodian": {
+                    "$ref": "contact",
+                    "description": "Information about the custodian"
+                }
+            }
+        },
+        "candidate": {
+            "id": "candidate",
+            "description": "Candidate data",
+            "properties": {
+                "election_years": {
+                    "type": "string",
+                    "description": "A list of election years that a committee was associated with that candidate."
+                },
+                "candidate_id": {
+                    "type": "string",
+                    "description": "Unique id of the candidate."
+                },
+                "candidate_name": {
+                    "type": "string",
+                    "description": "The name of the candidate in his or her most recent records."
+                },
+                "designation_full": {
+                    "type": "string",
+                    "description": "Full text designation of the committee. The committee's designation can affect what rules the committee must follow."
+                },
+                "designation": {
+                    "type": "string",
+                    "description": "Designation code of the committee."
+                },
+                "expire_date": {
+                    "type": "string",
+                    "description": "Date the information expires"
+                },
+                "link_date": {
+                    "type": "string",
+                    "description": "Date the committee was linked with a candidate."
+                },
+                "type_full": {
+                    "type": "string",
+                    "description": "The type of the committee. The committee's type can affect what rules the committee must follow."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the committee code. See full list of types and type codes here."
+                }
+            }
+        },
+        "address": {
+            "id": "address",
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City of committee address."
+                },
+                "expire_date": {
+                    "type": "string",
+                    "description": "Expiration date of the address"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "Sate of the committee address"
+                },
+                "street_1": {
+                    "type": "string",
+                    "description": "First line of the street of the committee address."
+                },
+                "street_2": {
+                    "type": "string",
+                    "description": "Second line of the street of the committee address, if provided."
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Zip code of the committee address."
+                }
+            }
+        },
+        "contact": {
+            "id": "contact",
+            "properties": {
+                "expire_date": {
+                    "type": "string",
+                    "description": "Expiry date for this contact"
+                },
+                "name_1": {
+                    "type": "string",
+                    "description": "Portion of name after the comma"
+                },
+                "name_2": {
+                    "type": "string",
+                    "description": "Portion of name before the comma"
+                },
+                "name_full": {
+                    "type": "string",
+                    "description": "Full name"
+                },
+                "name_middle": {
+                    "type": "string",
+                    "description": "Middle name or initial"
+                },
+                "name_title": {
+                    "type": "string",
+                    "description": "Title, if any"
+                },
+                "name_prefix": {
+                    "type": "string",
+                    "description": "Prefix, if any"
+                },
+                "name_suffix": {
+                    "type": "string",
+                    "description": "Suffix, if any"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for this contact"
+                },
+                "street_1": {
+                    "type": "string",
+                    "description": "Street address (line 1)"
+                },
+                "street_2": {
+                    "type": "string",
+                    "description": "Street address (line 2)"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of mailing address"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of mailing address"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Zip code of mailing address"
+                }
+            }
         }
     }
 }
-
-
-
-

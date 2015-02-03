@@ -112,8 +112,11 @@
                     "description": "Pagination metadata (see below)"
                 },
                 "results": {
-                    "$ref": "Candidate",
-                    "description": "Candidate data (see below)"
+                    "type": "array",
+                    "items": {
+                        "$ref": "Candidate"
+                    },
+                    "description": "A list of candidates (see below)"
                 }
             }
         },

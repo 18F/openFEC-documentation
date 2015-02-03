@@ -13,8 +13,10 @@
             "operations": [
                 {
                     "method": "GET",
-                    "summary": "Get a list of candidates.",
+                    "summary": "Get a list of totals and reports for a single committee.",
                     "nickname": "getCandidate",
+                    "notes": "The numbers in the financial summaries come from form 3 for House and Senate committees, form 3p for presidential committees and form 3x for parties and PACs.",
+                    "type": "totals_response",
                     "parameters": [
                         {
                             "paramType": "query",
@@ -39,7 +41,1148 @@
                 }
             ]
         }
-    ]
+    ],
+    "models":
+    {
+        "totals_response":
+        {
+            "id": "candidate_response",
+            "description": "JSON response from the /candidate endpoint",
+            "properties":
+            {
+                "api_version": {
+                    "type": "string",
+                    "description": "Version of API that produced this response"
+                },
+                "pagination": {
+                    "$ref": "pagination",
+                    "description": "Pagination metadata (see below)"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "summary"
+                    },
+                    "description": "A list of totals for a single committee"
+                }
+            }
+        },
+        "pagination": {
+            "id": "pagination",
+            "description": "Pagination metadata",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "description": "Total Candidates in response"
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "Current page"
+                },
+                "pages": {
+                    "type": "integer",
+                    "description": "Total number of pages"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "Candidates per page"
+                }
+            }
+        },
+        "summary": {
+            "id": "summary",
+            "description": "Totals and reports for a single committee",
+            "properties": {
+                "committee_id": {
+                    "type": "string",
+                    "description": "The committee these reports and totals refer to"
+                },
+                "expire_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Expiration date for this data."
+                },
+                "load_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Load date for this data."
+                },
+                "reports": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "reports"
+                    },
+                    "description": "A list of report data."
+                },
+                "totals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "totals"
+                    },
+                    "description": "A list of totals data."
+                }
+            }
+        },
+        "totals": {
+            "id": "totals",
+            "properties": {
+                "aggregate_contributions_personal_funds_primary": {
+                    "type": "number",
+                    "description": "Aggregate amount contributed from personal funds - primary (Form 3 -- BCRA Millionaire's Amendment  ruled unconstitutional Davis v FEC) [House/Senate]"
+                },
+                "all_loans_received_period": {
+                    "type": "number",
+                    "description": "All loans received during the period. [PAC/Party]"
+                },
+                "all_loans_received_year": {
+                    "type": "number",
+                    "description": "All loans received for the year to date. [PAC/Party]"
+                },
+                "all_other_loans_period": {
+                    "type": "number",
+                    "description": "All other loans during the period. [House/Senate]"
+                },
+                "all_other_loans_year": {
+                    "type": "number",
+                    "description": "All other loans for the year to date. [House/Senate]"
+                },
+                "beginning_image_number": {
+                    "type": "number",
+                    "description": "Image number of the first page of the filing. [Presidential, House/Senate, PAC/Party]"
+                },
+                "calendar_year": {
+                    "type": "number",
+                    "description": "Calendar year of the report. [PAC/Party]"
+                },
+                "candidate_contribution_period": {
+                    "type": "number",
+                    "description": "Candidate contribution during the period. [Presidential]"
+                },
+                "candidate_contribution_year": {
+                    "type": "number",
+                    "description": "Candidate contribution for the year to date. [Presidential]"
+                },
+                "candidate_contributions_period": {
+                    "type": "number",
+                    "description": "Candidate contributions during the period. [House/Senate]"
+                },
+                "candidate_contributions_year": {
+                    "type": "number",
+                    "description": "Candidate contributions for the year to date. [House/Senate]"
+                },
+                "cash_on_hand_beginning_calendar_year": {
+                    "type": "number",
+                    "description": "Cash on hand at the beginning of the calendar year. [PAC/Party]"
+                },
+                "cash_on_hand_beginning_period": {
+                    "type": "number",
+                    "description": "Total liquid assets at the beginning of the reporting period [Presidential, House/Senate, PAC/Party]"
+                },
+                "cash_on_hand_close_year": {
+                    "type": "number",
+                    "description": "Cash on hand close for the year to date. [PAC/Party]"
+                },
+                "cash_on_hand_end_period": {
+                    "type": "number",
+                    "description": "Cash on hand end during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "contributions": {
+                    "type": "number",
+                    "description": "The sum of all total_contributions_period reported for the election cycle. [Presidential, House/Senate,     PAC/Party]"
+                },
+                "coordinated_expenditures_by_party_committee_period": {
+                    "type": "number",
+                    "description": "Coordinated expenditures by party committee during the period. [PAC/Party]"
+                },
+                "coordinated_expenditures_by_party_committee_year": {
+                    "type": "number",
+                    "description": "Coordinated expenditures by party committee for the year to date. [PAC/Party]"
+                },
+                "debts_owed_by_committee": {
+                    "type": "number",
+                    "description": "Total of all the debts owed by a committee. [Presidential, House/Senate, PAC/Party]"
+                },
+                "debts_owed_to_committee": {
+                    "type": "number",
+                    "description": "Total of all the debts owed to a committee. [Presidential, House/Senate, PAC/Party]"
+                },
+                "disbursements": {
+                    "type": "number",
+                    "description": "The sum of all total_disbursements_period reported for the election cycle. [Presidential, House/Senate,     PAC/Party]"
+                },
+                "election_cycle": {
+                    "type": "number",
+                    "description": "The four-digit year for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "election_type_sk": {
+                    "type": "string",
+                    "description": "Election type sk. [PAC/Party]"
+                },
+                "end_image_number": {
+                    "type": "number",
+                    "description": "The image number of the last page of the filing. [Presidential, House/Senate, PAC/Party]"
+                },
+                "exempt_legal_accounting_disbursement_period": {
+                    "type": "number",
+                    "description": "Exempt legal accounting disbursement during the period. [Presidential]"
+                },
+                "exempt_legal_accounting_disbursement_year": {
+                    "type": "number",
+                    "description": "Exempt legal accounting disbursement for the year to date. [Presidential]"
+                },
+                "expire_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "If the treasurer, custodian of records, etc., changes, then the current record is expired and the new   record is loaded. This is the date the record was updated and no longer up to date. [Presidential, House/Senate, PAC  /Party]"
+                },
+                "expire_dateload_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date the report was recorded in the database. [Presidential, House/Senate, PAC/Party]"
+                },
+                "fed_candidate_committee_contribution_refunds_year": {
+                    "type": "number",
+                    "description": "Fed candidate committee contributions refunds for the year to date. [PAC/Party]"
+                },
+                "fed_candidate_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Fed candidate committee contributions during the period. [PAC/Party]"
+                },
+                "fed_candidate_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Fed candidate committee contributions for the year to date. [PAC/Party]"
+                },
+                "fed_candidate_contribution_refunds_period": {
+                    "type": "number",
+                    "description": "Fed candidate contributions refunds during the period. [PAC/Party]"
+                },
+                "federal_funds_period": {
+                    "type": "number",
+                    "description": "Federal funds during the period. [Presidential]"
+                },
+                "federal_funds_year": {
+                    "type": "number",
+                    "description": "Federal funds for the year to date. [Presidential]"
+                },
+                "fundraising_disbursements_period": {
+                    "type": "number",
+                    "description": "Fundraising disbursements during the period. [Presidential]"
+                },
+                "fundraising_disbursements_year": {
+                    "type": "number",
+                    "description": "Fundraising disbursements for the year to date. [Presidential]"
+                },
+                "gross_receipt_authorized_committee_primary": {
+                    "type": "number",
+                    "description": "Gross receipt authorized committee primary. [House/Senate]"
+                },
+                "gross_receipt_minus_personal_contributions_primary": {
+                    "type": "number",
+                    "description": "Gross receipts minus personal contributions in the primary. [House/Senate]"
+                },
+                "gross_receipts_authorized_committee_general": {
+                    "type": "number",
+                    "description": "Gross receipts authorized committee in the general election. [House/Senate]"
+                },
+                "independent_expenditures_period": {
+                    "type": "number",
+                    "description": "Independent expenditures during the period. [PAC/Party]"
+                },
+                "independent_expenditures_year": {
+                    "type": "number",
+                    "description": "Independent expenditures for the year to date. [PAC/Party]"
+                },
+                "individual_contribution_refunds_period": {
+                    "type": "number",
+                    "description": "Individual contribution refunds during the period. [PAC/Party]"
+                },
+                "individual_contribution_refunds_year": {
+                    "type": "number",
+                    "description": "Individual contributions refunds for the year to date. [PAC/Party]"
+                },
+                "individual_contributions_period": {
+                    "type": "number",
+                    "description": "Individual contributions during the period. [Presidential]"
+                },
+                "individual_contributions_year": {
+                    "type": "number",
+                    "description": "Individual contributions for the year to date. [Presidential]"
+                },
+                "individual_itemized_contributions_period": {
+                    "type": "number",
+                    "description": "Individual itemized contributions during the period. [House/Senate, PAC/Party]"
+                },
+                "individual_itemized_contributions_year": {
+                    "type": "number",
+                    "description": "Individual itemized contributions for the year to date. [PAC/Party]"
+                },
+                "individual_unitemized_contributions_period": {
+                    "type": "number",
+                    "description": "Individual unitemized contributions during the period. [House/Senate, PAC/Party]"
+                },
+                "individual_unitemized_contributions_year": {
+                    "type": "number",
+                    "description": "Individual unitemized contributions for the year to date. [PAC/Party]"
+                },
+                "items_on_hand_liquidated": {
+                    "type": "number",
+                    "description": "Items on hand liquidated. [Presidential]"
+                },
+                "load_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date the filing was loaded into the system. [Presidential, House/Senate, PAC/Party]"
+                },
+                "loan_repayments_candidate_period": {
+                    "type": "number",
+                    "description": "Loan repayments candidate loans during the period. [House/Senate]"
+                },
+                "loan_repayments_candidate_loans_year": {
+                    "type": "number",
+                    "description": "Loan repayments candidate loans for the year to date. [House/Senate]"
+                },
+                "loan_repayments_made_period": {
+                    "type": "number",
+                    "description": "Loan repayments made during the period. [PAC/Party]"
+                },
+                "loan_repayments_made_year": {
+                    "type": "number",
+                    "description": "Loan repayments made for the year to date. [PAC/Party]"
+                },
+                "loan_repayments_other_loans_period": {
+                    "type": "number",
+                    "description": "Loan repayments other loans during the period. [House/Senate]"
+                },
+                "loan_repayments_other_loans_year": {
+                    "type": "number",
+                    "description": "Loan repayments other loans for the year to date. [House/Senate]"
+                },
+                "loan_repayments_received_year": {
+                    "type": "number",
+                    "description": "Loan repayments received for the year to date. [PAC/Party]"
+                },
+                "loan_repymts_received_period": {
+                    "type": "number",
+                    "description": "Loan repymts received during the period. [PAC/Party]"
+                },
+                "loans_made_by_candidate_period": {
+                    "type": "number",
+                    "description": "Loans made by candidate during the period. [House/Senate]"
+                },
+                "loans_made_by_candidate_year": {
+                    "type": "number",
+                    "description": "Loans made by candidate for the year to date. [House/Senate]"
+                },
+                "loans_made_period": {
+                    "type": "number",
+                    "description": "Loans made during the period. [PAC/Party]"
+                },
+                "loans_made_year": {
+                    "type": "number",
+                    "description": "Loans made for the year to date. [PAC/Party]"
+                },
+                "loans_received_from_candidate_period": {
+                    "type": "number",
+                    "description": "Loans received from candidate during the period. [Presidential]"
+                },
+                "loans_received_from_candidate_year": {
+                    "type": "number",
+                    "description": "Loans received from candidate for the year to date. [Presidential]"
+                },
+                "net_contribution_summary_period": {
+                    "type": "number",
+                    "description": "Net contribution summary during the period. [Presidential]"
+                },
+                "net_contributions_period": {
+                    "type": "number",
+                    "description": "Net contributions during the period. [House/Senate, PAC/Party]"
+                },
+                "net_contributions_year": {
+                    "type": "number",
+                    "description": "Net contributions for the year to date. [House/Senate, PAC/Party]"
+                },
+                "net_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Net operating expenditures during the period. [House/Senate, PAC/Party]"
+                },
+                "net_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Net operating expenditures for the year to date. [House/Senate, PAC/Party]"
+                },
+                "net_operating_expenses_summary_period": {
+                    "type": "number",
+                    "description": "Net operating expenses summary during the period. [Presidential]"
+                },
+                "non_allocated_fed_election_activity_period": {
+                    "type": "number",
+                    "description": "Non allocated fed election activity during the period. [PAC/Party]"
+                },
+                "non_allocated_fed_election_activity_year": {
+                    "type": "number",
+                    "description": "Non allocated fed election activity for the year to date. [PAC/Party]"
+                },
+                "offsets_to_fundraising_exp_year": {
+                    "type": "number",
+                    "description": "Offsets to fundraising expenditures for the year to date. [Presidential]"
+                },
+                "offsets_to_fundraising_expenses_period": {
+                    "type": "number",
+                    "description": "Offsets to fundraising expenses during the period. [Presidential]"
+                },
+                "offsets_to_legal_accounting_period": {
+                    "type": "number",
+                    "description": "Offsets to legal accounting during the period. [Presidential]"
+                },
+                "offsets_to_legal_accounting_year": {
+                    "type": "number",
+                    "description": "Offsets to legal accounting for the year to date. [Presidential]"
+                },
+                "offsets_to_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Offsets to operating expenditures during the period. [Presidential, House/Senate]"
+                },
+                "offsets_to_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Offsets to operating expenditures for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "offsets_to_operating_expendituresenditures_period": {
+                    "type": "number",
+                    "description": "Offsets to operating expendituresenditures during the period. [PAC/Party]"
+                },
+                "offsets_to_operating_expendituresenditures_year": {
+                    "type": "number",
+                    "description": "Offsets to operating expendituresenditures for the year to date. [PAC/Party]"
+                },
+                "operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Operating expenditures during the period. [Presidential, House/Senate]"
+                },
+                "operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Operating expenditures for the year to date. [Presidential, House/Senate]"
+                },
+                "other_disbursements_period": {
+                    "type": "number",
+                    "description": "Other disbursements during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_disbursements_year": {
+                    "type": "number",
+                    "description": "Other disbursements for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_fed_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Other fed operating expenditures during the period. [PAC/Party]"
+                },
+                "other_fed_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Other fed operating expenditures for the year to date. [PAC/Party]"
+                },
+                "other_fed_receipts_period": {
+                    "type": "number",
+                    "description": "Other fed receipts during the period. [PAC/Party]"
+                },
+                "other_fed_receipts_year": {
+                    "type": "number",
+                    "description": "Other fed receipts for the year to date. [PAC/Party]"
+                },
+                "other_loans_received_period": {
+                    "type": "number",
+                    "description": "Other loans received during the period. [Presidential]"
+                },
+                "other_loans_received_year": {
+                    "type": "number",
+                    "description": "Other loans received for the year to date. [Presidential]"
+                },
+                "other_political_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Other political committee contributions during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_political_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Other political committee contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_receipts_period": {
+                    "type": "number",
+                    "description": "Other receipts during the period. [Presidential, House/Senate]"
+                },
+                "other_receipts_year": {
+                    "type": "number",
+                    "description": "Other receipts for the year to date. [Presidential, House/Senate]"
+                },
+                "political_party_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Political party committee contributions during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "political_party_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Political party committee contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "receipts": {
+                    "type": "number",
+                    "description": "The sum of all total_receipts_period reported for the election cycle. [Presidential, House/Senate, PAC/ Party]"
+                },
+                "refunded_individual_contributions_year": {
+                    "type": "number",
+                    "description": "Refunded individual contributions for the year to date. [Presidential]"
+                },
+                "refunded_other_political_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Refunded other political committee contributions during the period. [Presidential]"
+                },
+                "refunded_other_political_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Refunded other political committee contributions for the year to date. [Presidential]"
+                },
+                "refunded_political_party_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Refunded political party committee contributions during the period. [Presidential]"
+                },
+                "refunded_political_party_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Refunded political party committee contributions for the year to date. [Presidential]"
+                },
+                "refunded_individual_contributions_period": {
+                    "type": "number",
+                    "description": "Refunds individual contributions during the period. [Presidential, House/Senate]"
+                },
+                "refunds_individual_contributions_year": {
+                    "type": "number",
+                    "description": "Refunds individual contributions for the year to date. [House/Senate]"
+                },
+                "refunds_other_political_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Refunds other political committee contributions during the period. [House/Senate]"
+                },
+                "refunds_other_political_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Refunds other political committee contributions for the year to date. [House/Senate]"
+                },
+                "refunds_political_party_committee_contributions_period": {
+                    "type": "number",
+                    "description": "Refunds political party committee contributions during the period. [House/Senate]"
+                },
+                "refunds_political_party_committee_contributions_year": {
+                    "type": "number",
+                    "description": "Refunds political party committee contributions for the year to date. [House/Senate]"
+                },
+                "refunds_total_contributions_col_total_year": {
+                    "type": "number",
+                    "description": "Refunds total contributions col total for the year to date. [House/Senate]"
+                },
+                "repayments_loans_made_by_candidate_period": {
+                    "type": "number",
+                    "description": "Repayments loans made by candidate during the period. [Presidential]"
+                },
+                "repayments_loans_made_candidate_year": {
+                    "type": "number",
+                    "description": "Repayments loans made candidate for the year to date. [Presidential]"
+                },
+                "repayments_other_loans_period": {
+                    "type": "number",
+                    "description": "Repayments other loans during the period. [Presidential]"
+                },
+                "repayments_other_loans_year": {
+                    "type": "number",
+                    "description": "Repayments other loans for the year to date. [Presidential]"
+                },
+                "report_type": {
+                    "type": "string",
+                    "description": "What kind of report was filed. It can be quarterly, monthly, pre-general, etc. [Presidential, House/    Senate, PAC/Party]"
+                },
+                "report_type_full": {
+                    "type": "string",
+                    "description": "The written-out description of the report type. [Presidential, House/Senate, PAC/Party]"
+                },
+                "report_year": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The year of the report. [Presidential, House/Senate, PAC/Party]"
+                },
+                "shared_nonfed_activity": {
+                    "type": "number",
+                    "description": "Shared fed activity nonfed during the period. [PAC/Party]"
+                },
+                "shared_fed_activity_nonfed_year": {
+                    "type": "number",
+                    "description": "Shared fed activity nonfed for the year to date. [PAC/Party]"
+                },
+                "shared_fed_activity_period": {
+                    "type": "number",
+                    "description": "Shared fed activity during the period. [PAC/Party]"
+                },
+                "shared_fed_activity_year": {
+                    "type": "number",
+                    "description": "Shared fed activity for the year to date. [PAC/Party]"
+                },
+                "shared_fed_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Shared fed operating expenditures during the period. [PAC/Party]"
+                },
+                "shared_fed_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Shared fed operating expenditures for the year to date. [PAC/Party]"
+                },
+                "shared_nonfed_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Shared nonfed operating expenditures during the period. [PAC/Party]"
+                },
+                "shared_nonfed_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Shared non-federal operating expenditures for the year to date. [PAC/Party]"
+                },
+                "subtotal_period": {
+                    "type": "number",
+                    "description": "Subtotal during the period. [House/Senate]"
+                },
+                "subtotal_summary_page_period": {
+                    "type": "number",
+                    "description": "Subtotal summary page during the period. [PAC/Party]"
+                },
+                "subtotal_summary_period": {
+                    "type": "number",
+                    "description": "Subtotal summary during the period. [Presidential]"
+                },
+                "subtotal_summary_year": {
+                    "type": "number",
+                    "description": "Subtotal summary for the year to date. [PAC/Party]"
+                },
+                "total_contribution_refunds_col_total_period": {
+                    "type": "number",
+                    "description": "Total contribution refunds col total during the period. [House/Senate]"
+                },
+                "total_contribution_refunds_period": {
+                    "type": "number",
+                    "description": "Total contribution refunds during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_contribution_refunds_period_i": {
+                    "type": "number",
+                    "description": "Total contributions refunds during the period i. [PAC/Party]"
+                },
+                "total_contribution_refunds_year": {
+                    "type": "number",
+                    "description": "Total contribution refunds for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_contributions_column_total_period": {
+                    "type": "number",
+                    "description": "Total contributions column total during the period. [House/Senate]"
+                },
+                "total_contributions_period": {
+                    "type": "number",
+                    "description": "The sum of all contributions during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_contributions_year": {
+                    "type": "number",
+                    "description": "The sum of all contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_disbursements_period": {
+                    "type": "number",
+                    "description": "The sum of all disbursements during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_disbursements_summary_page_period": {
+                    "type": "number",
+                    "description": "Total disbursements summary page during the period. [PAC/Party]"
+                },
+                "total_disbursements_summary_page_year": {
+                    "type": "number",
+                    "description": "Total disbursements summary page for the year to date. [PAC/Party]"
+                },
+                "total_disbursements_summary_period": {
+                    "type": "number",
+                    "description": "Total disbursements summary during the period. [Presidential]"
+                },
+                "total_disbursements_year": {
+                    "type": "number",
+                    "description": "The sum of all disbursements for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_fed_disbursements_period": {
+                    "type": "number",
+                    "description": "Total fed disbursements during the period. [PAC/Party]"
+                },
+                "total_fed_disbursements_year": {
+                    "type": "number",
+                    "description": "Total fed disbursements for the year to date. [PAC/Party]"
+                },
+                "total_fed_election_activity_period": {
+                    "type": "number",
+                    "description": "Total fed elect activity during the period. [PAC/Party]"
+                },
+                "total_fed_election_activity_year": {
+                    "type": "number",
+                    "description": "Total fed election activity for the year to date. [PAC/Party]"
+                },
+                "total_fed_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Total fed operating expenditures during the period. [PAC/Party]"
+                },
+                "total_fed_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Total fed operating expenditures for the year to date. [PAC/Party]"
+                },
+                "total_fed_receipts_period": {
+                    "type": "number",
+                    "description": "Total fed receipts during the period. [PAC/Party]"
+                },
+                "total_fed_receipts_year": {
+                    "type": "number",
+                    "description": "Total fed receipts for the year to date. [PAC/Party]"
+                },
+                "total_individual_contributions": {
+                    "type": "number",
+                    "description": "Total individual contributions. [PAC/Party]"
+                },
+                "total_individual_contributions_period": {
+                    "type": "number",
+                    "description": "Total individual contributions during the period. [House/Senate]"
+                },
+                "total_individual_contributions_year": {
+                    "type": "number",
+                    "description": "Total individual contributions for the year to date. [House/Senate, PAC/Party]"
+                },
+                "total_individual_itemized_contributions_year": {
+                    "type": "number",
+                    "description": "Total individual itemized contributions for the year to date. Contributions under $200 are not  itemized. [House/Senate]"
+                },
+                "total_individual_unitemized_contributions_year": {
+                    "type": "number",
+                    "description": "Total individual unitemized contributions for the year to date. [House/Senate]"
+                },
+                "total_loan_repayments_made_period": {
+                    "type": "number",
+                    "description": "Total loan repayments made during the period. [Presidential]"
+                },
+                "total_loan_repayments_made_year": {
+                    "type": "number",
+                    "description": "Total loan repayments made for the year to date. [Presidential]"
+                },
+                "total_loan_repayments_period": {
+                    "type": "number",
+                    "description": "Total loan repayments during the period. [House/Senate]"
+                },
+                "total_loan_repayments_year": {
+                    "type": "number",
+                    "description": "Total loan repayments for the year to date. [House/Senate]"
+                },
+                "total_loans_period": {
+                    "type": "number",
+                    "description": "Total loans during the period. [House/Senate]"
+                },
+                "total_loans_received_period": {
+                    "type": "number",
+                    "description": "Total loans received during the period. [Presidential]"
+                },
+                "total_loans_received_year": {
+                    "type": "number",
+                    "description": "Total loans received for the year to date. [Presidential]"
+                },
+                "total_loans_year": {
+                    "type": "number",
+                    "description": "Total loans for the year to date. [House/Senate]"
+                },
+                "total_nonfed_transfers_period": {
+                    "type": "number",
+                    "description": "Total nonfed transfers during the period. [PAC/Party]"
+                },
+                "total_nonfed_transfers_year": {
+                    "type": "number",
+                    "description": "Total nonfed transfers for the year to date. [PAC/Party]"
+                },
+                "total_offsets_to_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Total offsets to operating expenditures during the period. [Presidential, House/Senate]"
+                },
+                "total_offsets_to_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Total offsets to operating expenditures for the year to date. [Presidential, House/Senate]"
+                },
+                "total_operating_expenditures_period": {
+                    "type": "number",
+                    "description": "Total operating expenditures during the period. [House/Senate, PAC/Party]"
+                },
+                "total_operating_expenditures_year": {
+                    "type": "number",
+                    "description": "Total operating expenditures for the year to date. [House/Senate, PAC/Party]"
+                },
+                "total_period": {
+                    "type": "number",
+                    "description": "Total during the period. [Presidential]"
+                },
+                "total_receipts": {
+                    "type": "number",
+                    "description": "Total receipts. [House/Senate]"
+                },
+                "total_receipts_period": {
+                    "type": "number",
+                    "description": "The sum of all receipts during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_receipts_summary_page_period": {
+                    "type": "number",
+                    "description": "Total receipts summary page during the period. [PAC/Party]"
+                },
+                "total_receipts_summary_page_year": {
+                    "type": "number",
+                    "description": "Total receipts summary page for the year to date. [PAC/Party]"
+                },
+                "total_receipts_summary_period": {
+                    "type": "number",
+                    "description": "Total receipts from the summary page during the period. [Presidential]"
+                },
+                "total_receipts_year": {
+                    "type": "number",
+                    "description": "The sum of all receipts for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "total_year": {
+                    "type": "number",
+                    "description": "Total for the year to date. [Presidential]"
+                },
+                "transfer_from_affiliated_committee_period": {
+                    "type": "number",
+                    "description": "Transfer from affiliated committee during the period. [Presidential]"
+                },
+                "transfer_from_affiliated_committee_year": {
+                    "type": "number",
+                    "description": "Transfer from affiliated committee for the year to date. [Presidential]"
+                },
+                "transfer_to_other_authorized_committe_year": {
+                    "type": "number",
+                    "description": "transfer to other authorized committee for the year to date. [Presidential]"
+                },
+                "transfer_to_other_authorized_committee_period": {
+                    "type": "number",
+                    "description": "Transfer to other authorized committee during the period. [Presidential]"
+                },
+                "transfers_from_affiliated_party_period": {
+                    "type": "number",
+                    "description": "Transfers from affiliated party during the period. [PAC/Party]"
+                },
+                "transfers_from_affiliated_party_year": {
+                    "type": "number",
+                    "description": "Transfers from affiliated party for the year to date. [PAC/Party]"
+                },
+                "transfers_from_nonfed_account_period": {
+                    "type": "number",
+                    "description": "Transfers from non-federal account during the period. [PAC/Party]"
+                },
+                "transfers_from_nonfed_account_year": {
+                    "type": "number",
+                    "description": "Transfers from non-federal account for the year to date. [PAC/Party]"
+                },
+                "transfers_from_nonfed_levin_period": {
+                    "type": "number",
+                    "description": "Transfers from non-federal levin funds (state and local party money that can spend on voter     registration and get-out-the-vote activities related to federal elections) during the period. [PAC/Party]"
+                },
+                "transfers_from_nonfed_levin_year": {
+                    "type": "number",
+                    "description": "Transfers from non-federal levin funds (state and local party money that can spend on voter     registration and get-out-the-vote activities related to federal elections) for the year to date. [PAC/Party]"
+                },
+                "transfers_from_other_authorized_committee_period": {
+                    "type": "number",
+                    "description": "Transfers from other authorized committee during the period. [House/Senate]"
+                },
+                "transfers_from_other_authorized_committee_year": {
+                    "type": "number",
+                    "description": "Transfers from other authorized committee for the year to date. [House/Senate]"
+                },
+                "transfers_to_affilitated_committees_year": {
+                    "type": "number",
+                    "description": "Transfers to affilitated committees for the year to date. [PAC/Party]"
+                },
+                "transfers_to_affliliated_committee_period": {
+                    "type": "number",
+                    "description": "Transfers to affiliated committee during the period. [PAC/Party]"
+                },
+                "transfers_to_other_authorized_committee_period": {
+                    "type": "number",
+                    "description": "Transfers to other authorized committee during the period. [House/Senate]"
+                },
+                "transfers_to_other_authorized_committee_year": {
+                    "type": "number",
+                    "description": "Transfers to other authorized committee for the year to date. [House/Senate]"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "This will be presidential, pac party or House Senate. It corresponds to the form type. [Presidential,   House/Senate, PAC/Party]",
+                    "enum": [
+                        "presidential",
+                        "pac_party",
+                        "house_senate"
+                    ]
+                }
+            }
+        },
+        "reports": {
+            "id": "reports",
+            "properties": {
+                "all_loans_received": {
+                    "type": "number",
+                    "description": "Total of all loans received for the two-year election cycle. [PAC/Party]"
+                },
+                "all_other_loans": {
+                    "type": "number",
+                    "description": "Total all other loans for the two-year election cycle. [House/Senate]"
+                },
+                "candidate_contribution": {
+                    "type": "number",
+                    "description": "Total candidate contribution for the two-year election cycle. [Presidential, House/Senate]"
+                },
+                "contribution_refunds": {
+                    "type": "number",
+                    "description": "Total contribution refunds for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "contributions": {
+                    "type": "number",
+                    "description": "Total contributions for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "coordinated_expenditures_by_party_committee": {
+                    "type": "number",
+                    "description": "Total coordinated expenditures by party committee for the two-year election cycle. [PAC/Party]"
+                },
+                "cycle": {
+                    "type": "number",
+                    "description": "The four-digit number for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "disbursements": {
+                    "type": "number",
+                    "description": "Total disbursements for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "exempt_legal_accounting_disbursement": {
+                    "type": "number",
+                    "description": "Total exempt legal accounting disbursement for the two-year election cycle. [Presidential]"
+                },
+                "fed_candidate_committee_contributions": {
+                    "type": "number",
+                    "description": "Total fed candidate committee contributions for the two-year election cycle. [PAC/Party]"
+                },
+                "fed_candidate_contribution_refunds": {
+                    "type": "number",
+                    "description": "Total fed candidate contribution refunds for the two-year election cycle. [PAC/Party]"
+                },
+                "fed_disbursements": {
+                    "type": "number",
+                    "description": "Total fed disbursements for the two-year election cycle. [PAC/Party]"
+                },
+                "fed_elect_activity": {
+                    "type": "number",
+                    "description": "Total fed elect activity for the two-year election cycle. [PAC/Party]"
+                },
+                "fed_operating_expenditures": {
+                    "type": "number",
+                    "description": "Total fed operating expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "fed_receipts": {
+                    "type": "number",
+                    "description": "Total fed receipts for the two-year election cycle. [PAC/Party]"
+                },
+                "federal_funds": {
+                    "type": "number",
+                    "description": "Total federal funds for the two-year election cycle. [Presidential]"
+                },
+                "fundraising_disbursements": {
+                    "type": "number",
+                    "description": "Total fundraising disbursements for the two-year election cycle. [Presidential]"
+                },
+                "independent_expenditures": {
+                    "type": "number",
+                    "description": "Total independent expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "individual_contribution_refunds": {
+                    "type": "number",
+                    "description": "Total individual contribution refunds for the two-year election cycle. [PAC/Party]"
+                },
+                "individual_contributions": {
+                    "type": "number",
+                    "description": "Total individual contributions for the two-year election cycle. [Presidential, House/Senate]"
+                },
+                "individual_itemized_contributions": {
+                    "type": "number",
+                    "description": "Total individual itemized contributions for the two-year election cycle. [House/Senate, PAC/Party]"
+                },
+                "individual_unitemized_contributions": {
+                    "type": "number",
+                    "description": "Total individual unitemized contributions for the two-year election cycle. [House/Senate, PAC/Party]"
+                },
+                "loan_repayments": {
+                    "type": "number",
+                    "description": "Total loan repayments for the two-year election cycle. [House/Senate]"
+                },
+                "loan_repayments_candidate": {
+                    "type": "number",
+                    "description": "Total loan repayments candidate loans for the two-year election cycle. [House/Senate]"
+                },
+                "loan_repayments_made": {
+                    "type": "number",
+                    "description": "Total loan repayments made for the two-year election cycle. [Presidential, PAC/Party]"
+                },
+                "loan_repayments_other_loans": {
+                    "type": "number",
+                    "description": "Total loan repayments other loans for the two-year election cycle. [House/Senate]"
+                },
+                "loan_repayments_received": {
+                    "type": "number",
+                    "description": "Total loan repayments received for the two-year election cycle. [PAC/Party]"
+                },
+                "loans": {
+                    "type": "number",
+                    "description": "Total loans for the two-year election cycle. [House/Senate]"
+                },
+                "loans_made": {
+                    "type": "number",
+                    "description": "Total loans made for the two-year election cycle. [PAC/Party]"
+                },
+                "loans_made_by_candidate": {
+                    "type": "number",
+                    "description": "Total loans made by candidate for the two-year election cycle. [House/Senate]"
+                },
+                "loans_received": {
+                    "type": "number",
+                    "description": "Total loans received for the two-year election cycle. [Presidential]"
+                },
+                "loans_received_from_candidate": {
+                    "type": "number",
+                    "description": "Total loans received from candidate for the two-year election cycle. [Presidential]"
+                },
+                "net_contributions": {
+                    "type": "number",
+                    "description": "Total net contributions for the two-year election cycle. [PAC/Party]"
+                },
+                "non_allocated_fed_election_activity": {
+                    "type": "number",
+                    "description": "Total non allocated fed election activity for the two-year election cycle. [PAC/Party]"
+                },
+                "nonfed_transfers": {
+                    "type": "number",
+                    "description": "Total non-federal transfers for the two-year election cycle. [PAC/Party]"
+                },
+                "offsets_to_fundraising_expenses": {
+                    "type": "number",
+                    "description": "Total offsets to fundraising expenses for the two-year election cycle. [Presidential]"
+                },
+                "offsets_to_legal_accounting": {
+                    "type": "number",
+                    "description": "Total offsets to legal accounting for the two-year election cycle. [Presidential]"
+                },
+                "offsets_to_operating_expenditures": {
+                    "type": "number",
+                    "description": "Total offsets to operating expenditures for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "offsets_to_operating_expendituresenditures": {
+                    "type": "number",
+                    "description": "Total offsets to operating expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "operating_expenditures": {
+                    "type": "number",
+                    "description": "Total operating expenditures for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_disbursements": {
+                    "type": "number",
+                    "description": "Total other disbursements for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_fed_operating_expenditures": {
+                    "type": "number",
+                    "description": "Total other fed operating expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "other_fed_receipts": {
+                    "type": "number",
+                    "description": "Total of other federal receipts for the two-year election cycle. [PAC/Party]"
+                },
+                "other_loans_received": {
+                    "type": "number",
+                    "description": "Total other loans received for the two-year election cycle. [Presidential]"
+                },
+                "other_political_committee_contributions": {
+                    "type": "number",
+                    "description": "Total other political committee contributions for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "other_receipts": {
+                    "type": "number",
+                    "description": "Total other receipts for the two-year election cycle. [Presidential, House/Senate]"
+                },
+                "political_party_committee_contributions": {
+                    "type": "number",
+                    "description": "Total political party committee contributions for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "receipts": {
+                    "type": "number",
+                    "description": "Total receipts for the two-year election cycle. [Presidential, House/Senate, PAC/Party]"
+                },
+                "refunded_other_political_committee_contributions": {
+                    "type": "number",
+                    "description": "Total refunded other political committee contributions for the two-year election cycle. [Presidential]"
+                },
+                "refunded_political_party_committee_contributions": {
+                    "type": "number",
+                    "description": "Total refunded political party committee contributions for the two-year election cycle. [Presidential]"
+                },
+                "refunds_individual_contributions": {
+                    "type": "number",
+                    "description": "Total refunds individual contributions for the two-year election cycle. [Presidential, House/Senate]"
+                },
+                "refunds_other_political_committee_contributions": {
+                    "type": "number",
+                    "description": "Total refunds other political committee contributions for the two-year election cycle. [House/Senate]"
+                },
+                "refunds_political_party_committee_contributions": {
+                    "type": "number",
+                    "description": "Total refunds political party committee contributions for the two-year election cycle. [House/Senate]"
+                },
+                "repayments_loans_made_by_candidate": {
+                    "type": "number",
+                    "description": "Total repayments loans made by candidate for the two-year election cycle. [Presidential]"
+                },
+                "repayments_other_loans": {
+                    "type": "number",
+                    "description": "Total repayments other loans for the two-year election cycle. [Presidential]"
+                },
+                "shared_fed_activity": {
+                    "type": "number",
+                    "description": "Total shared fed activity for the two-year election cycle. [PAC/Party]"
+                },
+                "shared_fed_activity_nonfed": {
+                    "type": "number",
+                    "description": "Total shared fed activity non-federal for the two-year election cycle. [PAC/Party]"
+                },
+                "shared_fed_operating_expenditures": {
+                    "type": "number",
+                    "description": "Total shared fed operating expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "shared_nonfed_operating_expenditures": {
+                    "type": "number",
+                    "description": "Total shared non-federal operating expenditures for the two-year election cycle. [PAC/Party]"
+                },
+                "transfer_from_affiliated_committee": {
+                    "type": "number",
+                    "description": "Total transfer from affiliated committee for the two-year election cycle. [Presidential]"
+                },
+                "transfer_to_other_authorized_committee": {
+                    "type": "number",
+                    "description": "Total transfer to other authorized committee for the two-year election cycle. [Presidential]"
+                },
+                "transfers_from_affiliated_party": {
+                    "type": "number",
+                    "description": "Total transfers from affiliated party for the two-year election cycle. [PAC/Party]"
+                },
+                "transfers_from_nonfed_account": {
+                    "type": "number",
+                    "description": "Total transfers from non-federal accounts for the two-year election cycle. [PAC/Party]"
+                },
+                "transfers_from_nonfed_levin": {
+                    "type": "number",
+                    "description": "Total transfers from non-federal levin funds for the two-year election cycle. [PAC/Party]"
+                },
+                "transfers_from_other_authorized_committee": {
+                    "type": "number",
+                    "description": "Total transfers from other authorized committee for the two-year election cycle. [House/Senate]"
+                },
+                "transfers_to_affiliated_committee": {
+                    "type": "number",
+                    "description": "Total transfers to affiliated committee for the two-year election cycle. [PAC/Party]"
+                },
+                "transfers_to_other_authorized_committee": {
+                    "type": "number",
+                    "description": "Total transfers to other authorized committee for the two-year election cycle. [House/Senate]"
+                }
+            }
+        }
+    }
 }
 
 
