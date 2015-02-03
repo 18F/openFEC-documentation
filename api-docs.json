@@ -1,7 +1,7 @@
 {
     "apiVersion": "0.2",
     "swaggerVersion": "1.2",
-    "basePath": "http://micahsaul.github.io/fec-docs/",
+    "basePath": "http://localhost:4000/developer-hub",
     "apis":
     [
         {
