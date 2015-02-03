@@ -6,19 +6,20 @@ layout: default
 
 ### Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet tempor enim, vitae volutpat eros. Integer non tincidunt arcu. Vestibulum at rutrum metus. This data is important because:
+Craft beer tilde beard, messenger bag readymade lomo actually bitters listicle. Pinterest Truffaut letterpress kitsch viral, narwhal retro quinoa. McSweeney's typewriter American Apparel small batch, master cleanse Williamsburg next level paleo tousled synth wayfarers flexitarian scenester bitters XOXO.
 
-- Donec neque lorem, vestibulum in tortor sed;
-- Elementum consequat ipsum. Mauris quam purus, feugiat vitae tortor in; and
-- Aliquet venenatis nulla. Nam massa diam, rutrum rutrum cursus eu.
+- Kitsch wayfarers cred vinyl.
+- Bespoke Williamsburg letterpress.
+- Meh selfies letterpress biodiesel distillery, 90's quinoa.
 
-Donec quis eros accumsan, aliquet justo ut, convallis eros. Etiam justo enim, blandit eget rhoncus id, tincidunt id ipsum. Pellentesque vehicula feugiat turpis, ac sodales velit ultrices eget. Nam posuere quam nec odio tincidunt, et egestas nulla scelerisque.
+Gentrify vinyl Thundercats, normcore mixtape iPhone kale chips bespoke. Wolf Blue Bottle 8-bit cold-pressed, 3 wolf moon four loko bespoke literally vinyl heirloom hoodie gentrify.
 
 ##### Get started
 <!--
 - [API basics](basics.html) introduces you to the operations offered by the API.
 -->
-- [API calls](console/) gives you a hands-on experience of those operations with an interactive console.
+- [API calls](console/) gives you a hands-on experience with the API with an interactive console.
+- [Code Reference](codes.html) provides quick reference for many of the abbreviations and short codes available in many of the fields.
 
 <!--
 [HMDA](http://www.consumerfinance.gov/hmda) is the CFPB's first dataset to publish using [Qu](http://cfpb.github.io/qu/), an in-progress data platform created to serve public data.
@@ -43,4 +44,4 @@ Qu is the first CFPB project built from the beginning on [GitHub](https://github
 <body id="overview"></body>
 
 
-Not interested in programming? You can still get the data! Visit the [explore the data](URL_of_data).
+Not interested in programming? You can still get the data! Visit [openFEC](http://fec.18f.us).

@@ -169,14 +169,14 @@
             "properties": {
                 "candidate_status": {
                     "type": "string",
-                    "description": "Single letter designation of candidate status",
+                    "description": "Single letter code of candidate status",
                     "enum": [
                         "C"
                     ]
                 },
                 "candidate_status_full": {
                     "type": "string",
-                    "description": "The candidate's statutory standing in an election. See ___ for definitions of potential values",
+                    "description": "The candidate's statutory standing in an election.",
                     "enum": [
                         "candidate",
                         "future_candidate",
@@ -195,7 +195,7 @@
                 },
                 "incumbent_challenge": {
                     "type": "string",
-                    "description": "Single letter designation of incumbency status",
+                    "description": "Single letter code of incumbency status",
                     "enum": [
                         "I",
                         "C",
@@ -213,7 +213,7 @@
                 },
                 "office": {
                     "type": "string",
-                    "description": "Single letter designation of office sought",
+                    "description": "Single letter code of office sought",
                     "enum": [
                         "P",
                         "S",
@@ -235,7 +235,7 @@
                 },
                 "party_affiliation": {
                     "type": "string",
-                    "description": "The full text string of political party of the candidate"
+                    "description": "The full text string of political party of the candidate. For full list, see Code Reference"
                 },
                 "primary_committee": {
                     "$ref": "committee",
@@ -297,7 +297,7 @@
                 },
                 "designation_full": {
                     "type": "string",
-                    "description": "Designation of the committee. Committee designation can affect the rules the committee must follow. See ___ for full list of designations and codes."
+                    "description": "Designation of the committee. Committee designation can affect the rules the committee must follow. See Code Reference for full list of designations and codes."
                 },
                 "election_year": {
                     "type": "string",
@@ -306,11 +306,11 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "Single letter designation for committee type."
+                    "description": "Single letter code for committee type."
                 },
                 "type_full": {
                     "type": "string",
-                    "description": "Full text committee type. Committee type can affect what rules the committee must follow. See ___ for full list of committee types and codes."
+                    "description": "Full text committee type. Committee type can affect what rules the committee must follow. See Code Reference for full list of committee types and codes."
                 }
             }
         }

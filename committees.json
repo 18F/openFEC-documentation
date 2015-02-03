@@ -52,13 +52,13 @@
                             "paramType": "query",
                             "type": "string",
                             "name": "type",
-                            "description": "one-letter code of committee type"
+                            "description": "Single-letter code of committee type"
                         },
                         {
                             "paramType": "query",
                             "type": "string",
                             "name": "designation",
-                            "description": "one-letter code of committee designation"
+                            "description": "Single-letter code of committee designation"
                         },
                         {
                             "paramType": "query",
@@ -310,6 +310,138 @@
                 "zip": {
                     "type": "string",
                     "description": "Zip code of mailing address"
+                }
+            }
+        },
+        "status": {
+            "id": "status",
+            "properties":{
+                "designation": {
+                    "type": "string",
+                    "description": "Single-letter code for designation of committee. For full list, see Code Reference",
+                    "enum": [
+                        "A",
+                        "B",
+                        "D",
+                        "J",
+                        "P",
+                        "U"
+                    ]
+                },
+                "designation_full": {
+                    "type": "string",
+                    "description": "Full text designation of committee.",
+                    "enum": [
+                        "Authorized by a candidate",
+                        "Lobbyist/Registrant PAC",
+                        "Leadership PAC",
+                        "Joint fundraiser",
+                        "Principal campaign committee of a candidate",
+                        "Unauthorized"
+                    ]
+                },
+                "organization_type": {
+                    "type": "string",
+                    "description": "Single-letter code for organizational structure of the committee. For full list, see Code Reference.",
+                    "enum": [
+                        "C",
+                        "L",
+                        "M",
+                        "T",
+                        "V",
+                        "W"
+                    ]
+                },
+                "organization_type_full": {
+                    "type": "string",
+                    "description": "Full text organziational structure of the committee.",
+                    "enum": [
+                        "Corporation",
+                        "Labor Organization",
+                        "Membership Organization",
+                        "Trade Association",
+                        "Cooperative",
+                        "Corporation Without Capital Stock"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Single-letter type of the committee."
+                },
+                "type_full": {
+                    "type": "string",
+                    "description": "Full-text type of the committee. For full list, see Code Reference."
+                }
+            }
+        },
+        "description": {
+            "id": "description",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description":  "Email of the committee, if provided."
+                },
+                "expire_date": {
+                    "type": "string",
+                    "description":  "Date the information expires."
+                },
+                "fax": {
+                    "type": "string",
+                    "description":  "Fax number of the committee, if provided."
+                },
+                "filing_frequency": {
+                    "type": "string",
+                    "description":  "How often a committee is scheduled to file.",
+                    "enum": [
+                        "A",
+                        "D",
+                        "M",
+                        "Q",
+                        "T",
+                        "W"
+                    ]
+                },
+                "form_type": {
+                    "type": "string",
+                    "description":  "The type of filing the information came from"
+                },
+                "website": {
+                    "type": "string",
+                    "description":  "The url to the committee's webpage, if provided."
+                },
+                "leadership_pac": {
+                    "type": "boolean",
+                    "description":  "A flag to identify leadership PACs"
+                },
+                "lobbyist_registrant_pac": {
+                    "type": "boolean",
+                    "description":  "A flag for PACs that have registered as being “established or controlled” by a lobbyist or registrant."
+                },
+                "original_registration_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description":  "Original date of committee registration."
+                },
+                "party_full": {
+                    "type": "string",
+                    "description":  "The full-text political party of the committee, if applicable. For full list, see Code Reference."
+                },
+                "party": {
+                    "type": "string",
+                    "description":  "The three-letter code for the political party of the committee, if applicable. For full list, see Code Reference."
+                },
+                "party_type": {
+                    "type": "string",
+                    "description":  "Describes the nature of the party such as NAT for national or STA for state."
+                },
+                "party_type_full": {
+                    "type": "string",
+                    "description":  "The written-out description of the party such as NATIONAL or STATE."
+                },
+                "qualifying_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description":  "Date a committee became qualified by meeting the requirements and filling our their paperwork."
                 }
             }
         }
