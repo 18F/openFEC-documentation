@@ -1,7 +1,7 @@
 {
     "apiVersion": "0.2",
     "swaggerVersion": "1.2",
-    "basePath": "http://micahsaul.github.io/fec-docs",
+    "basePath": "http://18f.github.io/openFEC-documentation",
     "apis":
     [
         {

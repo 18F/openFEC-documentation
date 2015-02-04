@@ -2,7 +2,7 @@ name: Developer Hub
 markdown: kramdown
 highlighter: pygments
 safe: true
-baseurl: /fec-docs
+baseurl: /openFEC-documentation
 exclude: ['.ruby-version', 'node_modules', 'package.json', 'bower.json']
 sass:
   sass_dir: static/_sass
