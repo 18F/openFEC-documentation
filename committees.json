@@ -1,7 +1,7 @@
 {
     "apiVersion": "0.2",
     "swaggerVersion": "1.2",
-    "basePath": "http://127.0.0.1:5000",
+    "basePath": "https://fec.18f.us/rest",
     "produces":
     [
         "application/json"
