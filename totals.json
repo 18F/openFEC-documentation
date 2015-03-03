@@ -501,6 +501,14 @@
                     "type": "number",
                     "description": "Other political committee contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
                 },
+                "other_political_committee_contribution_refunds_period":{
+                    "type": "number,
+                    "description": "Refunded contributions to other political committees during the period."
+                }
+                "other_political_committee_contribution_refunds_year":{
+                    "type": "number,
+                    "description": "Refunded contributions to other political committees for the year to date"
+                }
                 "other_receipts_period": {
                     "type": "number",
                     "description": "Other receipts during the period. [Presidential, House/Senate]"
@@ -516,6 +524,14 @@
                 "political_party_committee_contributions_year": {
                     "type": "number",
                     "description": "Political party committee contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
+                },
+                "political_party_committee_contribution_refunds_period": {
+                    "type": "number",
+                    "description": "Refunded political party committee contributions during the period. [Presidential, House/Senate, PAC/Party]"
+                },
+                "political_party_committee_contribution_refunds_year": {
+                    "type": "number",
+                    "description": "Refunded political party committee contributions for the year to date. [Presidential, House/Senate, PAC/Party]"
                 },
                 "receipts": {
                     "type": "number",
@@ -598,9 +614,9 @@
                     "format": "date-time",
                     "description": "The year of the report. [Presidential, House/Senate, PAC/Party]"
                 },
-                "shared_nonfed_activity": {
+                "allocated_federal_election_levin_share_period": {
                     "type": "number",
-                    "description": "Shared fed activity nonfed during the period. [PAC/Party]"
+                    "description": "Allocated FEA - Levin Share during the period. [PAC/Party]"
                 },
                 "shared_fed_activity_nonfed_year": {
                     "type": "number",
@@ -622,9 +638,9 @@
                     "type": "number",
                     "description": "Shared fed operating expenditures for the year to date. [PAC/Party]"
                 },
-                "shared_nonfed_operating_expenditures_period": {
+                "nonfed_share_allocated_disbursements_period": {
                     "type": "number",
-                    "description": "Shared nonfed operating expenditures during the period. [PAC/Party]"
+                    "description": "Shared nonfed allocated disbursements during the period. [PAC/Party]"
                 },
                 "shared_nonfed_operating_expenditures_year": {
                     "type": "number",
@@ -886,7 +902,7 @@
                     "type": "number",
                     "description": "Transfers to affilitated committees for the year to date. [PAC/Party]"
                 },
-                "transfers_to_affliliated_committee_period": {
+                "transfers_to_affliliated_committees_period": {
                     "type": "number",
                     "description": "Transfers to affiliated committee during the period. [PAC/Party]"
                 },
